@@ -10,5 +10,6 @@
   --border-radius-l: 1.2rem;
   --grid-pad: 1rem;
   --grid-gap: 2rem;
-  --grid-col: calc((1200px - (2 * (var(--grid-pad) + var(--grid-gap)))) / 3);
+  --grid-col: calc((100% - 2 * var(--grid-gap)) / 3);
+  --col-1-of-3: calc(var(--grid-col) + var(--grid-gap));
 }

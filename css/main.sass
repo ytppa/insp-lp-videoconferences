@@ -8,11 +8,24 @@ body
     font-size: 20px
     line-height: 1.3
 
+body
+    background-color: var(--bg, hsl(217.5, 44.4%, 96.5%))
+    background-image: url("./../i/footer-bg.jpg")
+    background-position: center bottom
+    background-repeat: no-repeat
+    background-size: 1920px auto
+
+@media screen and (min-width: 1921px)
+    body
+        background-size: 100% auto
+
 @media screen and (max-width: 1199px)
     html, 
     body
         font-size: 16px
 
+// -------------------------------------------------------------------------
+    
 .button 
     display: block
     padding: .75rem 2rem
@@ -52,6 +65,28 @@ body
     margin: auto
     padding: 1rem var(--grid-pad, 1rem)
 
+.clr-bl-1000
+    color: var(--color-black-1000, hsl(0, 0%, 0%))
+
+.clr-bl-800
+    color: var(--color-black-800, hsl(0, 0%, 20%))
+
+.pad-r-1col
+    padding-right: var(--col-1-of-3, 33%)
+
+.pad-l-1col
+    padding-left: var(--col-1-of-3, 33%)
+
+h2
+    font-size: 3rem
+h3
+    font-size: 1.6rem
+
+
+// -------------------------------------------------------------------------
+.section + .section 
+    margin-top: 5rem
+
 .main
     position: relative
     z-index: 1
@@ -68,7 +103,7 @@ body
         top: 0
         bottom: 0
         object-fit: cover
-        transform: translateX(40vw)
+        transform: translateX(48vw)
 
 .header 
     &--wrapper
@@ -82,9 +117,7 @@ body
     padding-bottom: 2rem
 
     &--wrapper 
-        padding: 0 var(--grid-pad, 1rem)
-    &--inner
-        max-width: calc(.7 * 1200px)
+        padding: 1.25rem var(--grid-pad, 1rem)
 
     &--title-1st
         font-size: 3rem
@@ -94,19 +127,27 @@ body
         font-weight: bold
         text-transform: uppercase
         color: var(--active)
+        margin-top: -0.8rem
     
 
     &--subtitle
         font-size: 1.6rem
-        margin-top: 1.5rem
+        margin-top: 1.3rem
 
     &--text
         font-size: 1rem
         opacity: .8
-        margin-top: 1.5rem
+        margin-top: 1rem
 
+.stratched-button
+    width: var(--grid-col)
+    > *
+        margin: 0 auto
+        
     .button
         margin-top: 1.5rem
+        padding-left: 3.5rem
+        padding-right: 3.5rem
 
 
 .f-cols
@@ -118,12 +159,18 @@ body
 
         justify-content: stretch
         align-items: stretch
+        
+    &--item
+        flex: 1 1 33%
     
 .f-col
     position: relative
     display: flex
+    flex-direction: column
     justify-content: center
     align-items: center
+    gap: 1rem
+
     padding: 1.5rem
     z-index: 1
     text-align: center
@@ -147,9 +194,17 @@ body
     &:after 
         box-shadow:  .5rem .5rem 1.5rem hsl(0, 0%, 75%), -.5rem -.5rem 1.5rem hsl(0, 0%, 100%)
 
+    .icon 
+        font-size: 3rem
+
 // Секция 2
 
 .possibilities
+    background: url(./../i/s2-bg.jpg)
+    background-repeat: no-repeat
+    background-position: center center
+    background-size: contain
+
     &--wrapper
         display: flex
         flex-direction: column
@@ -158,10 +213,9 @@ body
         & > * + * 
             margin-top: 2.5rem
 
-    h2 
-        font-size: 2.8rem
+    h2
         text-align: center
-        max-width: min(calc(.75 * 1200px), 100vw)
+        // max-width: min(calc(.75 * 1200px), 100vw)
 
         span
             text-transform: uppercase
@@ -215,7 +269,6 @@ body
         margin-top: 1.45rem
 
 .dots 
-
     --dot-size: .38rem
     --dot-size-active: calc(var(--dot-size) * 3.2)
     --dot-color: var(--active)
@@ -245,3 +298,39 @@ body
 
     &--paragraph
         margin-top: 1.5rem
+
+.additional
+
+    &--heading
+        position: relative
+
+        h3
+            text-align: right
+
+        p
+            font-size: 1rem
+            color: var(--color-black-800)
+            margin-top: 1rem
+
+    &--content
+        margin-top: 2rem
+
+    .f-col
+        justify-content: flex-start
+        padding-bottom: 2.8rem
+
+.invitation
+    padding-bottom: 6rem
+
+    h3 
+        margin-top: .5rem
+
+    &--text
+        margin-top: 1.2rem
+    
+    &--bottom
+        margin-top: 3rem
+
+        &-text
+            color: var(--color-white-1000, white)
+            text-align: right

@@ -10,6 +10,19 @@ body {
   line-height: 1.3;
 }
 
+body {
+  background-color: var(--bg, hsl(217.5deg, 44.4%, 96.5%));
+  background-image: url("./../i/footer-bg.jpg");
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 1920px auto;
+}
+
+@media screen and (min-width: 1921px) {
+  body {
+    background-size: 100% auto;
+  }
+}
 @media screen and (max-width: 1199px) {
   html,
 body {
@@ -65,6 +78,34 @@ body {
   padding: 1rem var(--grid-pad, 1rem);
 }
 
+.clr-bl-1000 {
+  color: var(--color-black-1000, hsl(0deg, 0%, 0%));
+}
+
+.clr-bl-800 {
+  color: var(--color-black-800, hsl(0deg, 0%, 20%));
+}
+
+.pad-r-1col {
+  padding-right: var(--col-1-of-3, 33%);
+}
+
+.pad-l-1col {
+  padding-left: var(--col-1-of-3, 33%);
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+.section + .section {
+  margin-top: 5rem;
+}
+
 .main {
   position: relative;
   z-index: 1;
@@ -82,7 +123,7 @@ body {
   bottom: 0;
   -o-object-fit: cover;
      object-fit: cover;
-  transform: translateX(40vw);
+  transform: translateX(48vw);
 }
 
 .header--wrapper {
@@ -96,10 +137,7 @@ body {
   padding-bottom: 2rem;
 }
 .hero--wrapper {
-  padding: 0 var(--grid-pad, 1rem);
-}
-.hero--inner {
-  max-width: 840px;
+  padding: 1.25rem var(--grid-pad, 1rem);
 }
 .hero--title-1st {
   font-size: 3rem;
@@ -109,18 +147,28 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   color: var(--active);
+  margin-top: -0.8rem;
 }
 .hero--subtitle {
   font-size: 1.6rem;
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
 }
 .hero--text {
   font-size: 1rem;
   opacity: 0.8;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
-.hero .button {
+
+.stratched-button {
+  width: var(--grid-col);
+}
+.stratched-button > * {
+  margin: 0 auto;
+}
+.stratched-button .button {
   margin-top: 1.5rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
 }
 
 .f-cols--wrapper {
@@ -131,12 +179,17 @@ body {
   justify-content: stretch;
   align-items: stretch;
 }
+.f-cols--item {
+  flex: 1 1 33%;
+}
 
 .f-col {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   padding: 1.5rem;
   z-index: 1;
   text-align: center;
@@ -160,7 +213,16 @@ body {
 .f-col:after {
   box-shadow: 0.5rem 0.5rem 1.5rem hsl(0deg, 0%, 75%), -0.5rem -0.5rem 1.5rem hsl(0deg, 0%, 100%);
 }
+.f-col .icon {
+  font-size: 3rem;
+}
 
+.possibilities {
+  background: url(./../i/s2-bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
 .possibilities--wrapper {
   display: flex;
   flex-direction: column;
@@ -170,9 +232,7 @@ body {
   margin-top: 2.5rem;
 }
 .possibilities h2 {
-  font-size: 2.8rem;
   text-align: center;
-  max-width: min(900px, 100vw);
 }
 .possibilities h2 span {
   text-transform: uppercase;
@@ -254,4 +314,40 @@ body {
 }
 .text-section--paragraph {
   margin-top: 1.5rem;
+}
+
+.additional--heading {
+  position: relative;
+}
+.additional--heading h3 {
+  text-align: right;
+}
+.additional--heading p {
+  font-size: 1rem;
+  color: var(--color-black-800);
+  margin-top: 1rem;
+}
+.additional--content {
+  margin-top: 2rem;
+}
+.additional .f-col {
+  justify-content: flex-start;
+  padding-bottom: 2.8rem;
+}
+
+.invitation {
+  padding-bottom: 6rem;
+}
+.invitation h3 {
+  margin-top: 0.5rem;
+}
+.invitation--text {
+  margin-top: 1.2rem;
+}
+.invitation--bottom {
+  margin-top: 3rem;
+}
+.invitation--bottom-text {
+  color: var(--color-white-1000, white);
+  text-align: right;
 }
