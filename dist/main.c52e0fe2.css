@@ -1,0 +1,209 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: hsl(217.5, 44.4%, 96.5%);
+  --color-white-1000: hsl(0, 0%, 100%);
+  --color-black-1000: hsl(0, 0%, 0%);
+  --color-black-800: hsl(0, 0%, 20%);
+  --active: hsl(209, 73%, 58%);
+  --transition-dur-s: .2s;
+  --transition-dur-m: .4s;
+  --transition-dur-l: .6s;
+  --border-radius-l: 1.2rem;
+  --grid-pad: 1rem;
+  --grid-gap: 2rem;
+  --grid-col: calc((1200px - (2 * (var(--grid-pad) + var(--grid-gap)))) / 3);
+}
+
+html,
+body {
+  min-height: 100vh;
+  font-size: 20px;
+  font-family: Arial;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 1199px) {
+  html,
+body {
+    font-size: 16px;
+  }
+}
+.button {
+  display: block;
+  padding: 0.75rem 2rem;
+  font-size: 0.9rem;
+  line-height: 1em;
+  border-radius: var(--border-radius-l, 1.2rem);
+  cursor: pointer;
+  text-align: center;
+  background: var(--active, hsl(209deg, 73%, 58%));
+  background: linear-gradient(to right, hsl(209deg, 73%, 58%) 0%, hsl(209deg, 73%, 58%) 50%, hsl(199.8deg, 60.2%, 64.5%) 100%);
+  background-size: 200% 100%;
+  background-position: -100% 0%;
+  color: var(--color-white-1000, white);
+}
+.button:hover {
+  -webkit-animation: gradient-hover var(--transition-dur-s, 0.2s) ease-out forwards;
+          animation: gradient-hover var(--transition-dur-s, 0.2s) ease-out forwards;
+}
+
+.insp-gr {
+  color: var(--color-active);
+  background: linear-gradient(to right, hsl(209deg, 73%, 58%) 0%, hsl(199.8deg, 60.2%, 64.5%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@-webkit-keyframes gradient-hover {
+  0% {
+    background-position: -100% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+@keyframes gradient-hover {
+  0% {
+    background-position: -100% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+.wrapper-1200 {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem var(--grid-pad, 1rem);
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 3rem;
+}
+.main .header {
+  z-index: 10;
+}
+.main > picture {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transform: translateX(40vw);
+}
+
+.header--wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+.hero--wrapper {
+  padding: 0 var(--grid-pad, 1rem);
+}
+.hero--inner {
+  max-width: 840px;
+}
+.hero--title-1st {
+  font-size: 3rem;
+}
+.hero--title-2nd {
+  font-size: 7.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--active);
+}
+.hero--subtitle {
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+}
+.hero--text {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 1.5rem;
+}
+.hero .button {
+  margin-top: 1.5rem;
+}
+
+.f-cols--wrapper {
+  display: flex;
+  gap: var(--grid-gap);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.f-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  z-index: 1;
+  text-align: center;
+  color: var(--color-black-800, hsl(0deg, 0%, 20%));
+}
+.f-col:after, .f-col:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--border-radius-l, 1.2rem);
+}
+.f-col:before {
+  background: hsla(0deg, 0%, 100%, 0.4);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  z-index: -1;
+}
+.f-col:after {
+  box-shadow: 0.5rem 0.5rem 1.5rem hsl(0deg, 0%, 75%), -0.5rem -0.5rem 1.5rem hsl(0deg, 0%, 100%);
+}
+
+.possibilities--wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.possibilities h2 span {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.note-w-text {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gap);
+  flex-wrap: nowrap;
+}
+.note-w-text--image {
+  flex: 1 1 auto;
+}
+.note-w-text--text {
+  flex: 0 1 var(--grid-col);
+}
+.note-w-text--image {
+  aspect-ratio: 10/6;
+}
+.note-w-text--image img {
+  width: auto;
+  height: auto;
+}
+
+/*# sourceMappingURL=/main.c52e0fe2.css.map */
