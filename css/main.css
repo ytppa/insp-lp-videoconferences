@@ -2,27 +2,12 @@
   box-sizing: border-box;
 }
 
-:root {
-  --bg: hsl(217.5, 44.4%, 96.5%);
-  --color-white-1000: hsl(0, 0%, 100%);
-  --color-black-1000: hsl(0, 0%, 0%);
-  --color-black-800: hsl(0, 0%, 20%);
-  --active: hsl(209, 73%, 58%);
-  --transition-dur-s: .2s;
-  --transition-dur-m: .4s;
-  --transition-dur-l: .6s;
-  --border-radius-l: 1.2rem;
-  --grid-pad: 1rem;
-  --grid-gap: 2rem;
-  --grid-col: calc((1200px - (2 * (var(--grid-pad) + var(--grid-gap)))) / 3);
-}
-
 html,
 body {
   min-height: 100vh;
-  font-size: 20px;
   font-family: Arial;
-  line-height: 1.2;
+  font-size: 20px;
+  line-height: 1.3;
 }
 
 @media screen and (max-width: 1199px) {
@@ -181,6 +166,14 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.possibilities--wrapper > * + * {
+  margin-top: 2.5rem;
+}
+.possibilities h2 {
+  font-size: 2.8rem;
+  text-align: center;
+  max-width: min(900px, 100vw);
+}
 .possibilities h2 span {
   text-transform: uppercase;
   font-weight: bold;
@@ -192,16 +185,73 @@ body {
   gap: var(--grid-gap);
   flex-wrap: nowrap;
 }
-.note-w-text--image {
+.note-w-text--left {
   flex: 1 1 auto;
 }
-.note-w-text--text {
+.note-w-text--right {
   flex: 0 1 var(--grid-col);
 }
 .note-w-text--image {
   aspect-ratio: 10/6;
+  position: relative;
 }
-.note-w-text--image img {
-  width: auto;
+.note-w-text--bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.note-w-text--im {
+  width: 75.53%;
   height: auto;
+  aspect-ratio: 574/360;
+  position: absolute;
+  left: 12.237%;
+  top: 6.264%;
+}
+.note-w-text--right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+}
+.note-w-text--dots {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.45rem;
+}
+
+.dots {
+  --dot-size: .38rem;
+  --dot-size-active: calc(var(--dot-size) * 3.2);
+  --dot-color: var(--active);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: calc(var(--dot-size) * 1.3);
+}
+.dots--item {
+  font-size: 0px;
+  line-height: 0px;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: calc(var(--dot-size) / 2);
+  background-color: var(--dot-color);
+}
+.dots--item_active {
+  width: var(--dot-size-active);
+}
+
+.text-section h3 {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.text-section--paragraph {
+  margin-top: 1.5rem;
 }

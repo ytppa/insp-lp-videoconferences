@@ -1,0 +1,14 @@
+:root {
+  --bg: hsl(217.5, 44.4%, 96.5%);
+  --color-white-1000: hsl(0, 0%, 100%);
+  --color-black-1000: hsl(0, 0%, 0%);
+  --color-black-800: hsl(0, 0%, 20%);
+  --active: hsl(209, 73%, 58%);
+  --transition-dur-s: .2s;
+  --transition-dur-m: .4s;
+  --transition-dur-l: .6s;
+  --border-radius-l: 1.2rem;
+  --grid-pad: 1rem;
+  --grid-gap: 2rem;
+  --grid-col: calc((1200px - (2 * (var(--grid-pad) + var(--grid-gap)))) / 3);
+}

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Видеоконференции Inspider</title>
     <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
@@ -60,12 +61,28 @@
         <div class="possibilities--wrapper wrapper-1200">
             <h2>Возможности видеоконференций <span class="insp-gr">Inspider</span></h2>
             <div class="note-w-text">
-                <div class="note-w-text--image">
-                    <img src="./i/screen-01.jpg" alt="">
+                <div class="note-w-text--left">
+                    <div class="note-w-text--image">
+                        <picture class="note-w-text--bg">
+                            <source srcset="./i/notebook.webp" type="image/webp">
+                            <img src="./i/notebook.png" alt="">
+                        </picture>
+                        <img class="note-w-text--im" src="./i/screen-01.jpg" alt="">
+                    </div>
+                    <div class="note-w-text--dots">
+                        <div class="dots">
+                            <button class="dots--item">1</button>
+                            <button class="dots--item">2</button>
+                            <button class="dots--item">3</button>
+                            <button class="dots--item dots--item_active">4</button>
+                            <button class="dots--item">5</button>
+                            <button class="dots--item">6</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="note-w-text--text">
+                <div class="note-w-text--right text-section">
                     <h3 class="insp-gr">Аналитика встречи</h3>
-                    <div class="note-w-text--paragraph">
+                    <div class="text-section--paragraph">
                         Удобное управление качеством деловой коммуникации 
                         с помощью инструментов по отслеживанию активности 
                         участников во время конференции, отслеживание времени, 
