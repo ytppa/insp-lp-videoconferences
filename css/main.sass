@@ -1,0 +1,200 @@
+* 
+    box-sizing: border-box
+
+:root 
+    --bg: hsl(217.5, 44.4%, 96.5%)
+
+    --color-white-1000: hsl(0, 0%, 100%)
+
+    --color-black-1000: hsl(0, 0%, 0%)
+    --color-black-800: hsl(0, 0%, 20%)
+
+    --active: hsl(209, 73%, 58%)
+
+    --transition-dur-s: .2s
+    --transition-dur-m: .4s
+    --transition-dur-l: .6s
+
+    --border-radius-l: 1.2rem
+
+    --grid-pad: 1rem
+    --grid-gap: 2rem
+    --grid-col: calc((1200px  - (2 * (var(--grid-pad) + var(--grid-gap)))) / 3)
+
+html, 
+body
+    min-height: 100vh
+    font-size: 20px
+    font-family: Arial
+    line-height: 1.2
+
+@media screen and (max-width: 1199px)
+    html, 
+    body
+        font-size: 16px
+
+.button 
+    display: block
+    padding: .75rem 2rem
+    font-size: .9rem
+    line-height: 1em
+    border-radius: var(--border-radius-l, 1.2rem)
+    cursor: pointer
+    text-align: center
+
+    background: var(--active, hsl(209, 73%, 58%))
+    background: linear-gradient(to right, hsl(209, 73%, 58%) 0%, hsl(209, 73%, 58%) 50%, hsl(199.8, 60.2%, 64.5%) 100%)
+    background-size: 200% 100%
+    background-position: -100% 0%
+
+    color: var(--color-white-1000, white)
+
+    &:hover
+        animation: gradient-hover var(--transition-dur-s, .2s) ease-out forwards
+
+.insp-gr
+    // text-transform: uppercase
+    // font-weight: bold
+    color: var(--color-active)
+    
+    background: linear-gradient(to right, hsl(209, 73%, 58%) 0%, hsl(199.8, 60.2%, 64.5%) 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+
+@keyframes gradient-hover
+    0% 
+        background-position: -100% 0%
+    100%
+        background-position: -200% 0%
+
+.wrapper-1200
+    max-width: 1200px
+    margin: auto
+    padding: 1rem var(--grid-pad, 1rem)
+
+.main
+    position: relative
+    z-index: 1
+    padding-bottom: 3rem
+
+    .header
+        z-index: 10
+
+    > picture 
+        position: absolute
+        z-index: -1
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        object-fit: cover
+        transform: translateX(40vw)
+
+.header 
+    &--wrapper
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+   
+.hero
+    padding-top: 3rem
+    padding-bottom: 2rem
+
+    &--wrapper 
+        padding: 0 var(--grid-pad, 1rem)
+    &--inner
+        max-width: calc(.7 * 1200px)
+
+    &--title-1st
+        font-size: 3rem
+
+    &--title-2nd
+        font-size: 7.5rem
+        font-weight: bold
+        text-transform: uppercase
+        color: var(--active)
+    
+
+    &--subtitle
+        font-size: 1.6rem
+        margin-top: 1.5rem
+
+    &--text
+        font-size: 1rem
+        opacity: .8
+        margin-top: 1.5rem
+
+    .button
+        margin-top: 1.5rem
+
+
+.f-cols
+    &--wrapper
+        display: flex
+        gap: var(--grid-gap)
+        padding-top: 1rem
+        padding-bottom: 1rem
+
+        justify-content: stretch
+        align-items: stretch
+    
+.f-col
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 1.5rem
+    z-index: 1
+    text-align: center
+    color: var(--color-black-800, hsl(0, 0%, 20%))
+
+    &:after,
+    &:before 
+        content: ""
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        border-radius: var(--border-radius-l, 1.2rem)
+    
+    &:before
+        background: hsla(0, 0%, 100%, .4)
+        backdrop-filter: blur(4px)
+        z-index: -1
+
+    &:after 
+        box-shadow:  .5rem .5rem 1.5rem hsl(0, 0%, 75%), -.5rem -.5rem 1.5rem hsl(0, 0%, 100%)
+
+// Секция 2
+
+.possibilities
+    &--wrapper
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    h2 span
+        text-transform: uppercase
+        font-weight: bold
+
+.note-w-text
+    display: flex
+    flex-direction: row
+    gap: var(--grid-gap)
+    flex-wrap: nowrap
+
+    &--image
+        flex: 1 1 auto
+
+    &--text
+        flex: 0 1 var(--grid-col)
+
+    
+    &--image 
+        aspect-ratio: 10 / 6
+
+        img 
+            width: auto
+            height: auto

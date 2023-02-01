@@ -1,0 +1,17 @@
+{
+  "name": "lp-videoconference",
+  "version": "1.0.0",
+  "description": "Landing page",
+  "default": "index.html",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "keywords": [
+    "html",
+    "landing-page"
+  ],
+  "author": "ytppA",
+  "license": "ISC"
+}
