@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/variables.css">
     <link rel="stylesheet" href="./css/main.css">
+
+    <!-- AOS (animate on scroll) -->
+    <link rel="stylesheet" type="text/css" href="./css/aos.css">
+    <script type="text/javascript" src="./js/aos.js" defer></script>
+
+    <script src="./js/main.js" type="module" defer></script>
     
-    
-    <!-- Fontawesome icons -->
-    <link href="./css/fa/css/fontawesome.min.css" rel="stylesheet">
-    <link href="./css/fa/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +24,7 @@
         <div class="header">
             <div class="header--wrapper wrapper-1200">
                 <a href="#" class="logo" target="_blank" ><img src="./i/logo.png" alt=""></a>
-                <button class="button">Записаться на вебинар</button>
+                <button id="cta-0" class="button">Записаться на вебинар</button>
             </div>
         </div>
         <div class="hero">
@@ -33,16 +35,16 @@
                         <div class="hero--title-2nd insp-gr">Inspider</div>
                         <div class="hero--subtitle">
                             Удобный сервис для проведения онлайн-конференций
-                            с быстрым доступом и автоматической записью
+                            с&nbsp;быстрым доступом и&nbsp;автоматической записью
                         </div>
                         <div class="hero--text">
-                            Мы предлагаем интеграции уже известных и привычных 
+                            Мы предлагаем интеграции уже известных и&nbsp;привычных 
                             инструментов для проведения видеоконференций 
                             разного формата
                         </div>
                     </div>
                     <div class="stratched-button">
-                        <button class="button">Узнать больше</button>
+                        <button id="cta-1" class="button">Узнать больше</button>
                     </div>
                 </div>
             </div>
@@ -50,13 +52,13 @@
         <div class="f-cols">
             <div class="f-cols--wrapper wrapper-1200">
                 <div class="f-cols--item f-col">
-                    Повышение вовлечённости сотрудников в рабочие процессы
+                    Повышение вовлечённости сотрудников в&nbsp;рабочие процессы
                 </div>
                 <div class="f-cols--item f-col">
                     Простота использования функционала программы
                 </div>
                 <div class="f-cols--item f-col">
-                    Эффективность сотрудничества и объединение внутри компании
+                    Эффективность сотрудничества и&nbsp;объединение внутри компании
                 </div>
             </div>
         </div>
@@ -95,10 +97,10 @@
                     <h3 class="insp-gr">Аналитика встречи</h3>
                     <div class="text-section--paragraph">
                         Удобное управление качеством деловой коммуникации 
-                        с помощью инструментов по отслеживанию активности 
-                        участников во время конференции, отслеживание времени, 
-                        проведенного на встрече, время включенных камеры 
-                        и микрофона
+                        с&nbsp;помощью инструментов по&nbsp;отслеживанию активности 
+                        участников во&nbsp;время конференции, отслеживание времени, 
+                        проведенного на&nbsp;встрече, время включенных камеры 
+                        и&nbsp;микрофона
                     </div>
                 </div>
             </div>
@@ -114,37 +116,48 @@
                 </h3>
                 <p class="pad-l-1col">
                     Проводит ли команда мозговой штурм, или обсуждение рабочей 
-                    задачи с постзаметками со встречи, описывает проект или обучает 
-                    сотрудников – возможности для совместной работы с INSPIDER 
-                    не ограничены.
+                    задачи с&nbsp;постзаметками со встречи, описывает проект или обучает 
+                    сотрудников – возможности для совместной работы с&nbsp;INSPIDER 
+                    не&nbsp;ограничены.
                 </p>
             </div>
             <div class="additional--content">
                 <div class="f-cols">
                     <div class="f-cols--wrapper wrapper-1200">
-                        <div class="f-cols--item f-col">
+                        <div class="f-cols--item f-col" 
+                            data-aos="fade-up"
+                            data-aos-easing="ease-out-cubic"
+                        >
                             <div class="clr-bl-1000">Сотрудничество</div>
                             <div class="icon"><i class="insp-gr fa-solid fa-list-check"></i></div>
                             <div class="clr-bl-800">
-                                Обменивайтесь новыми идеями и планами с коллегами.
+                                Обменивайтесь новыми идеями и&nbsp;планами с&nbsp;коллегами.
                             </div>
                         </div>
-                        <div class="f-cols--item f-col">
+                        <div class="f-cols--item f-col" 
+                            data-aos="fade-up" 
+                            data-aos-easing="ease-out-cubic"
+                            data-aos-delay="100"
+                        >
                             <div class="clr-bl-1000">Планирование задач</div>
                             <div class="icon"><i class="insp-gr fa-solid fa-list-check"></i></div>
                             <div class="clr-bl-800">
-                                Работайте над общей стратегией и конкретными 
+                                Работайте над общей стратегией и&nbsp;конкретными 
                                 целями, составляйте пошаговые планы реализации 
-                                проектов с командой.
+                                проектов с&nbsp;командой.
                             </div>
                         </div>
-                        <div class="f-cols--item f-col">
+                        <div class="f-cols--item f-col" 
+                            data-aos="fade-up" 
+                            data-aos-easing="ease-out-cubic"
+                            data-aos-delay="200"
+                        >
                             <div class="clr-bl-1000">Мониторинг</div>
                             <div class="icon"><i class="insp-gr fa-solid fa-chart-line"></i></div>
                             <div class="clr-bl-800">
                                 Проводите встречи-ретроспективы, выстраивайте 
                                 системы наблюдения, оценки, контроля 
-                                и управления проектами с участниками.
+                                и&nbsp;управления проектами с&nbsp;участниками.
                             </div>
                         </div>
                     </div>
@@ -159,12 +172,12 @@
                 <div class="invitation--indent pad-r-1col">
                     <h2>Приглашаем</h2>
                     <h3 class="invitation--subtitle">
-                        вас с вашей командой протестировать возможности INSPIDER
+                        вас с&nbsp;вашей командой протестировать возможности INSPIDER
                     </h3>
                     <div class="invitation--text">
-                        для того, чтобы объединять сотрудников и продолжать 
-                        эффективно работать над совместными проектами на всех 
-                        этапах — от создания идеи до внедрения.
+                        для того, чтобы объединять сотрудников и&nbsp;продолжать 
+                        эффективно работать над совместными проектами на&nbsp;всех 
+                        этапах — от&nbsp;создания идеи до&nbsp;внедрения.
                     </div>
                 </div>
                 <div class="stratched-button">
@@ -181,8 +194,6 @@
     </div>
 
 
-
-    <script src="./js/main.js" type="module" defer></script>
 </body>
 
 </html>

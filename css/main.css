@@ -215,6 +215,10 @@ h3 {
 }
 .f-col .icon {
   font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  background: cyan;
+  opacity: 0.2;
 }
 
 .possibilities {
