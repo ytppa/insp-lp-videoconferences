@@ -1,32 +1,40 @@
-* 
+*
     box-sizing: border-box
 
-html, 
+html,
 body
-    min-height: 100vh
     font-family: Arial
     font-size: 20px
     line-height: 1.3
+    margin: 0
+    padding: 0
 
 body
-    background-color: var(--bg, hsl(217.5, 44.4%, 96.5%))
-    background-image: url("./../i/footer-bg.jpg")
-    background-position: center bottom
-    background-repeat: no-repeat
-    background-size: 1920px auto
+    overflow: hidden
+
+.root
+    max-height: 100vh
+    overflow-y: auto
+
+    &--inner
+        background-color: var(--bg, hsl(217.5, 44.4%, 96.5%))
+        background-image: url("./../i/footer-bg.jpg")
+        background-position: center bottom
+        background-repeat: no-repeat
+        background-size: 1920px auto
 
 @media screen and (min-width: 1921px)
-    body
+    .root--inner
         background-size: 100% auto
 
 @media screen and (max-width: 1199px)
-    html, 
+    html,
     body
         font-size: 16px
 
 // -------------------------------------------------------------------------
-    
-.button 
+
+.button
     display: block
     padding: .75rem 2rem
     font-size: .9rem
@@ -49,13 +57,13 @@ body
     // text-transform: uppercase
     // font-weight: bold
     color: var(--color-active)
-    
+
     background: linear-gradient(to right, hsl(209, 73%, 58%) 0%, hsl(199.8, 60.2%, 64.5%) 100%)
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
 
 @keyframes gradient-hover
-    0% 
+    0%
         background-position: -100% 0%
     100%
         background-position: -200% 0%
@@ -82,17 +90,17 @@ h2
 h3
     font-size: 1.6rem
 
-
 // -------------------------------------------------------------------------
-.section + .section 
+.section + .section
     margin-top: 5rem
 
 .main
     position: relative
     z-index: 1
     padding-bottom: 3rem
+    overflow: hidden
 
-    > picture 
+    > picture
         position: absolute
         z-index: -1
         left: 0
@@ -133,8 +141,8 @@ h3
 
         #cta-0
             display: block
-        
-@keyframes menuFadeDown 
+
+@keyframes menuFadeDown
     0%
         top: -6rem
     100%
@@ -144,7 +152,7 @@ h3
     padding-top: 3rem
     padding-bottom: 2rem
 
-    &--wrapper 
+    &--wrapper
         padding: 1.25rem var(--grid-pad, 1rem)
 
     &--title-1st
@@ -156,7 +164,6 @@ h3
         text-transform: uppercase
         color: var(--active)
         margin-top: -0.8rem
-    
 
     &--subtitle
         font-size: 1.6rem
@@ -171,11 +178,10 @@ h3
     width: var(--grid-col)
     > *
         margin: 0 auto
-        
+
     .button
         margin-top: 1.5rem
         min-width: 75%
-
 
 .f-cols
     &--wrapper
@@ -186,10 +192,10 @@ h3
 
         justify-content: stretch
         align-items: stretch
-        
+
     &--item
         flex: 1 1 33%
-    
+
 .f-col
     position: relative
     display: flex
@@ -204,7 +210,7 @@ h3
     color: var(--color-black-800, hsl(0, 0%, 20%))
 
     &:after,
-    &:before 
+    &:before
         content: ""
         position: absolute
         top: 0
@@ -212,36 +218,41 @@ h3
         right: 0
         bottom: 0
         border-radius: var(--border-radius-l, 1.2rem)
-    
+
     &:before
         background: hsla(0, 0%, 100%, .4)
         backdrop-filter: blur(4px)
         z-index: -1
 
-    &:after 
-        box-shadow:  .5rem .5rem 1.5rem hsl(0, 0%, 75%), -.5rem -.5rem 1.5rem hsl(0, 0%, 100%)
+    &:after
+        box-shadow: .5rem .5rem 1.5rem hsl(0, 0%, 75%), -.5rem -.5rem 1.5rem hsl(0, 0%, 100%)
 
-    .icon 
+    .icon
         font-size: 3rem
         width: 3rem
         height: 3rem
         background: cyan
         opacity: .2
 
-
+// Possibilities section
 .possibilities
-    background: url(./../i/s2-bg.jpg)
-    background-repeat: no-repeat
-    background-position: center center
-    background-size: contain
 
-    &--wrapper
+    &--cont
         display: flex
         flex-direction: column
         align-items: center
 
-        & > * + * 
+        background: url(./../i/s2-bg.jpg)
+        background-repeat: no-repeat
+        background-position: center center
+        background-size: contain
+
+        & > * + *
             margin-top: 2.5rem
+    &--gallery
+        display: flex
+        flex-direction: column
+        align-items: center
 
     h2
         text-align: center
@@ -250,7 +261,6 @@ h3
         span
             text-transform: uppercase
             font-weight: bold
-
 
 .note-w-text
     display: flex
@@ -264,8 +274,7 @@ h3
     &--right
         flex: 0 1 var(--grid-col)
 
-    
-    &--image 
+    &--image
         aspect-ratio: 10 / 6
         position: relative
 
@@ -277,14 +286,14 @@ h3
         bottom: 0
         object-fit: contain
 
-    &--im 
+    &--im
         width: 75.53%
         aspect-ratio: 574 / 360
         position: absolute
         left: 12.237%
         top: 6.264%
-        
-        img 
+
+        img
             width: 100%
             height: auto
 
@@ -295,7 +304,7 @@ h3
         align-items: flex-start
         padding-bottom: 2rem
 
-    &--dots 
+    &--dots
         position: relative
         display: flex
         justify-content: center
@@ -305,20 +314,9 @@ h3
     display: grid
     grid-auto-flow: row
     gap: 1rem
-    overflow-y: auto
-    scroll-behavior: smooth
-    overscroll-behavior-y: contain
-    scroll-snap-type: y mandatory
-    scrollbar-width: none
+    overflow-y: hidden
 
-    &::-webkit-scrollbar
-        display: none
-
-    &--item
-        scroll-snap-align: start
-
-
-.dots 
+.dots
     --dot-size: .38rem
     --dot-size-active: calc(var(--dot-size) * 3.2)
     --dot-color: var(--active)
@@ -329,17 +327,16 @@ h3
     flex-wrap: nowrap
     gap: calc(var(--dot-size) * 1.3)
 
-    &--item 
+    &--item
         font-size: 0px
         line-height: 0px
         width: var(--dot-size)
         height: var(--dot-size)
         border-radius: calc(var(--dot-size) / 2)
         background-color: var(--dot-color)
-    
+
         &_active
             width: var(--dot-size-active)
-
 
 .text-section
     h3
@@ -372,19 +369,18 @@ h3
 .invitation
     padding-bottom: 6rem
 
-    h3 
+    h3
         margin-top: .5rem
 
     &--text
         margin-top: 1.2rem
-    
+
     &--bottom
         margin-top: 3rem
 
         &-text
             color: var(--color-white-1000, white)
             text-align: right
-
 
 body
     scroll-snap-type: y proximity
