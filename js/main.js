@@ -61,25 +61,6 @@
     /**
      * Vertical scrolling gallery
      */
-    // const scrollingContainer = document.querySelector(".note-w-text");
-
-    // const process_touchstart = e => console.log("~ touchstart");
-    // const process_touchcancel = e => console.log("~ touchcancel");
-    // const process_touchend = e => console.log("~ touchend");
-    // const process_touchmove = e => {
-    //     switch (e.touches.length) {
-    //         case 1: console.log(`handle_one_touch`, e); break;
-    //         case 2: console.log(`handle_two_touches`, e); break;
-    //         case 3: console.log(`handle_three_touches`, e); break;
-    //         default: console.log(`gesture_not_supported`, e); break;
-    //     }
-    //     console.log("~ touchmove");
-    // }
-
-    // scrollingContainer.addEventListener("touchstart", process_touchstart, false);
-    // scrollingContainer.addEventListener("touchmove", process_touchmove, false);
-    // scrollingContainer.addEventListener("touchcancel", process_touchcancel, false);
-    // scrollingContainer.addEventListener("touchend", process_touchend, false);
 
     //#region ScrollingGallery
     class ScrollingGallery {
@@ -91,12 +72,19 @@
             // Amount of slides
             this.num = num;
 
+            // Elements that should be animated
+            this.a = {
+                dots: this.gallery.querySelectorAll('.note-w-text .dots--item'),
+                slides: this.gallery.querySelectorAll('.note-w-text .slider--item'),
+                texts: this.gallery.querySelectorAll('.note-w-text .text-section--item'),
+            };
+
+            // Style preparations
             this.cont.style.position = "relative";
             this.gallery.style.position = "absolute";
             this.gallery.style.top = "0";
             this.gallery.style.left = "0";
             this.gallery.style.right = "0";
-
 
             // Seting the gallery container size  
             this.setupContainer();
@@ -125,7 +113,6 @@
         }
 
         onScroll(e) {
-
             const scrollTop = this.main.scrollTop,
                 contSize = this.cont.getBoundingClientRect(),
                 gallerySize = this.gallery.getBoundingClientRect(),
@@ -134,29 +121,61 @@
             let newPos = (window.innerHeight - gallerySize.height) / 2 - contSize.top;
             
 
-            if (newPos > 0 && newPos < contSize.height - gallerySize.height) {
-                // Center of screen
-                this.move(newPos);
+            if (newPos > contSize.height - gallerySize.height) {
+                // Stick to the bottom of container
+                newPos = contSize.height - gallerySize.height;
             } else if (newPos <= 0) {
                 // Stick to the top of container
-                this.move(0);
-            } else {
-                // Stick to the bottom of container
-                this.move(contSize.height - gallerySize.height);
-            }
+                newPos = 0;
+            } 
+
+            this.move(newPos);
+            this.animate(newPos);
 
             // Store the scroll position for page reload cases
             localStorage.curScroll = this.main.scrollTop;
         }
 
-        move(y) {
+        move(pos) {
+            this.gallery.style.transform = `translateY(${pos}px)`;
+        }
 
-            this.gallery.style.transform = `translateY(${y}px)`;
+        animate(pos) {
+            const h = this.cont.getBoundingClientRect().height,
+                curSlide = Math.floor((pos / h) * (this.num + 1)); 
+                // num + 1 - is inreased in order to let the last slide be vissible enough time
+            
 
-            /**
-             * Imitating some gallery state changes during scroll
-             * We'll dynamically change the background
-             */
+            // Some very custom things below
+            if (!this.prevSlide || this.prevSlide != curSlide) {
+                console.log(`~ Slide ${curSlide}`);
+
+                // Dots
+                this.a.dots.forEach((item, i) => {
+                    item.classList.remove("dots--item_active");
+                    if (i == curSlide) {
+                        item.classList.add("dots--item_active");
+                    }
+                });
+
+                // Slides
+                this.a.slides.forEach((item, i) => {
+                    item.classList.remove("slider--item_active");
+                    if (i == curSlide) {
+                        item.classList.add("slider--item_active");
+                    }
+                });
+
+                // Texts 
+                this.a.texts.forEach((item, i) => {
+                    item.classList.remove("text-section--item_active");
+                    if (i == curSlide) {
+                        item.classList.add("text-section--item_active");
+                    }
+                });
+
+                this.prevSlide = curSlide;
+            }
         }
 
         resize() {
@@ -176,7 +195,7 @@
         document.querySelector(".root"),
         document.querySelector(".possibilities"),
         document.querySelector(".possibilities--cont"),
-        5
+        6
     )
 
 })()
