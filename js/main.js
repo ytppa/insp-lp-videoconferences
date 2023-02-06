@@ -5,6 +5,9 @@
 
 (function () {
 
+
+    const rootScrollableElement = document.querySelector(".root");
+    
     /**
      * Menu behavior
      */
@@ -16,7 +19,7 @@
             this._sticked = false;
 
             const that = this;
-            document.addEventListener("scroll", () => { that.onScroll() });
+            rootScrollableElement.addEventListener("scroll", () => { that.onScroll() });
         }
 
         get sticked() {
@@ -192,7 +195,7 @@
     //#endregion ScrollingGallery
 
     let scrollingGallery = new ScrollingGallery(
-        document.querySelector(".root"),
+        rootScrollableElement,
         document.querySelector(".possibilities"),
         document.querySelector(".possibilities--cont"),
         6
