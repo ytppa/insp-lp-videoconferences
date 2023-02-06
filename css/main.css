@@ -111,9 +111,6 @@ h3 {
   z-index: 1;
   padding-bottom: 3rem;
 }
-.main .header {
-  z-index: 10;
-}
 .main > picture {
   position: absolute;
   z-index: -1;
@@ -126,12 +123,59 @@ h3 {
   transform: translateX(48vw);
 }
 
-.header--wrapper {
+.header {
+  z-index: 10;
+  min-height: 4.5rem;
+}
+.header--inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.header--wrapper {
+  min-height: 4.5rem;
+}
+.header #cta-0 {
+  display: none;
+}
+.header.is-sticked .header--wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: hsla(0deg, 0%, 100%, 0.65);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  z-index: 10;
+  -webkit-animation-name: menuFadeDown;
+          animation-name: menuFadeDown;
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-iteration-count: forward;
+          animation-iteration-count: forward;
+}
+.header.is-sticked .header--wrapper #cta-0 {
+  display: block;
+}
 
+@-webkit-keyframes menuFadeDown {
+  0% {
+    top: -6rem;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes menuFadeDown {
+  0% {
+    top: -6rem;
+  }
+  100% {
+    top: 0px;
+  }
+}
 .hero {
   padding-top: 3rem;
   padding-bottom: 2rem;
@@ -167,8 +211,7 @@ h3 {
 }
 .stratched-button .button {
   margin-top: 1.5rem;
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
+  min-width: 75%;
 }
 
 .f-cols--wrapper {
@@ -270,11 +313,14 @@ h3 {
 }
 .note-w-text--im {
   width: 75.53%;
-  height: auto;
   aspect-ratio: 574/360;
   position: absolute;
   left: 12.237%;
   top: 6.264%;
+}
+.note-w-text--im img {
+  width: 100%;
+  height: auto;
 }
 .note-w-text--right {
   display: flex;
@@ -288,6 +334,24 @@ h3 {
   display: flex;
   justify-content: center;
   margin-top: 1.45rem;
+}
+
+.slider {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+.slider--item {
+  scroll-snap-align: start;
 }
 
 .dots {
@@ -354,4 +418,13 @@ h3 {
 .invitation--bottom-text {
   color: var(--color-white-1000, white);
   text-align: right;
+}
+
+body {
+  -ms-scroll-snap-type: y proximity;
+      scroll-snap-type: y proximity;
+}
+body > .section {
+  border: 2px solid red;
+  scroll-snap-align: start;
 }

@@ -92,9 +92,6 @@ h3
     z-index: 1
     padding-bottom: 3rem
 
-    .header
-        z-index: 10
-
     > picture 
         position: absolute
         z-index: -1
@@ -105,13 +102,44 @@ h3
         object-fit: cover
         transform: translateX(48vw)
 
-.header 
-    &--wrapper
+.header
+    z-index: 10
+    min-height: 4.5rem
+
+    &--inner
         display: flex
         justify-content: space-between
         align-items: center
 
-   
+    &--wrapper
+        min-height: 4.5rem
+
+    #cta-0
+        display: none
+
+    &.is-sticked &--wrapper
+        position: fixed
+        left: 0
+        right: 0
+        background-color: hsla(0, 0%, 100%, 0.65)
+        backdrop-filter: blur(4px)
+        z-index: 10
+        // @keyframes duration | easing-function | delay |
+        // iteration-count | direction | fill-mode | play-state | name
+        animation-name: menuFadeDown
+        animation-duration: .2s
+        animation-timing-function: ease-out
+        animation-iteration-count: forward
+
+        #cta-0
+            display: block
+        
+@keyframes menuFadeDown 
+    0%
+        top: -6rem
+    100%
+        top: 0px
+
 .hero
     padding-top: 3rem
     padding-bottom: 2rem
@@ -146,8 +174,7 @@ h3
         
     .button
         margin-top: 1.5rem
-        padding-left: 3.5rem
-        padding-right: 3.5rem
+        min-width: 75%
 
 
 .f-cols
@@ -202,8 +229,6 @@ h3
         opacity: .2
 
 
-// Секция 2
-
 .possibilities
     background: url(./../i/s2-bg.jpg)
     background-repeat: no-repeat
@@ -254,11 +279,14 @@ h3
 
     &--im 
         width: 75.53%
-        height: auto
         aspect-ratio: 574 / 360
         position: absolute
         left: 12.237%
         top: 6.264%
+        
+        img 
+            width: 100%
+            height: auto
 
     &--right
         display: flex
@@ -272,6 +300,23 @@ h3
         display: flex
         justify-content: center
         margin-top: 1.45rem
+
+.slider
+    display: grid
+    grid-auto-flow: row
+    gap: 1rem
+    overflow-y: auto
+    scroll-behavior: smooth
+    overscroll-behavior-y: contain
+    scroll-snap-type: y mandatory
+    scrollbar-width: none
+
+    &::-webkit-scrollbar
+        display: none
+
+    &--item
+        scroll-snap-align: start
+
 
 .dots 
     --dot-size: .38rem
@@ -339,3 +384,11 @@ h3
         &-text
             color: var(--color-white-1000, white)
             text-align: right
+
+
+body
+    scroll-snap-type: y proximity
+
+    > .section
+        border: 2px solid red
+        scroll-snap-align: start
