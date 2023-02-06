@@ -1,4 +1,6 @@
-AOS.init();
+// AOS.init({
+//     startEvent: 'customScroll'
+// });
 
 
 (function () {
@@ -89,14 +91,23 @@ AOS.init();
             // Amount of slides
             this.num = num;
 
-            // Seting the gallery container size  
-            this.setupContainer();
-
             this.cont.style.position = "relative";
             this.gallery.style.position = "absolute";
             this.gallery.style.top = "0";
             this.gallery.style.left = "0";
             this.gallery.style.right = "0";
+
+
+            // Seting the gallery container size  
+            this.setupContainer();
+
+            // Return to prev Scroll position (if it was saved in localStorage before) 
+            const prevScrollPos = localStorage.getItem("curScroll") || 0;
+            if (prevScrollPos > 0) {
+                this.main.scrollTo({
+                    top: prevScrollPos
+                })
+            }
 
             // Listeners
             this.scrollListener = this.main.addEventListener(
@@ -108,17 +119,20 @@ AOS.init();
                 "resize",
                 this.resize.bind(this)
             );
+
+            
+            this.onScroll();
         }
 
         onScroll(e) {
-            console.log("~ Scroll");
+
             const scrollTop = this.main.scrollTop,
                 contSize = this.cont.getBoundingClientRect(),
                 gallerySize = this.gallery.getBoundingClientRect(),
                 mainSize = this.main.getBoundingClientRect();
 
             let newPos = (window.innerHeight - gallerySize.height) / 2 - contSize.top;
-            console.log(newPos);
+            
 
             if (newPos > 0 && newPos < contSize.height - gallerySize.height) {
                 // Center of screen
@@ -130,10 +144,12 @@ AOS.init();
                 // Stick to the bottom of container
                 this.move(contSize.height - gallerySize.height);
             }
+
+            // Store the scroll position for page reload cases
+            localStorage.curScroll = this.main.scrollTop;
         }
 
         move(y) {
-            console.log(`move ${y}`);
 
             this.gallery.style.transform = `translateY(${y}px)`;
 
@@ -144,16 +160,14 @@ AOS.init();
         }
 
         resize() {
-            console.log(`~ resize`);
             this.setupContainer();
+            this.onScroll();
         }
 
         setupContainer() {
-            console.log(`~ init`);
             const galleryHeight = this.gallery.getBoundingClientRect().height;
 
             this.cont.style.height = `${this.num * galleryHeight}px`;
-            this.onScroll();
         }
     }
     //#endregion ScrollingGallery

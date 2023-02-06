@@ -283,13 +283,13 @@ h3 {
   background-position: center center;
   background-size: contain;
 }
-.possibilities--cont > * + * {
-  margin-top: 2.5rem;
-}
 .possibilities--gallery {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.possibilities--gallery > * + * {
+  margin-top: 2.5rem;
 }
 .possibilities h2 {
   text-align: center;
@@ -420,13 +420,4 @@ h3 {
 .invitation--bottom-text {
   color: var(--color-white-1000, white);
   text-align: right;
-}
-
-body {
-  -ms-scroll-snap-type: y proximity;
-      scroll-snap-type: y proximity;
-}
-body > .section {
-  border: 2px solid red;
-  scroll-snap-align: start;
 }

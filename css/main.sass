@@ -247,12 +247,13 @@ h3
         background-position: center center
         background-size: contain
 
-        & > * + *
-            margin-top: 2.5rem
     &--gallery
         display: flex
         flex-direction: column
         align-items: center
+
+        & > * + *
+            margin-top: 2.5rem
 
     h2
         text-align: center
@@ -382,9 +383,3 @@ h3
             color: var(--color-white-1000, white)
             text-align: right
 
-body
-    scroll-snap-type: y proximity
-
-    > .section
-        border: 2px solid red
-        scroll-snap-align: start
