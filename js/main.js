@@ -7,7 +7,7 @@
 
 
     const rootScrollableElement = document.querySelector(".root");
-    
+
     /**
      * Menu behavior
      */
@@ -61,6 +61,8 @@
         "is-sticked"
     );
 
+
+
     /**
      * Vertical scrolling gallery
      */
@@ -111,7 +113,7 @@
                 this.resize.bind(this)
             );
 
-            
+
             this.onScroll();
         }
 
@@ -122,7 +124,7 @@
                 mainSize = this.main.getBoundingClientRect();
 
             let newPos = (window.innerHeight - gallerySize.height) / 2 - contSize.top;
-            
+
 
             if (newPos > contSize.height - gallerySize.height) {
                 // Stick to the bottom of container
@@ -130,7 +132,7 @@
             } else if (newPos <= 0) {
                 // Stick to the top of container
                 newPos = 0;
-            } 
+            }
 
             this.move(newPos);
             this.animate(newPos);
@@ -143,11 +145,45 @@
             this.gallery.style.transform = `translateY(${pos}px)`;
         }
 
+        animateText(pos) {
+            /**
+             * Text
+             */
+            const posShare = pos / this.cont.getBoundingClientRect().height,
+                textSlides = document.querySelectorAll(".text-section--item"),
+                num = this.num,
+                textContHeight = textSlides[0].parentElement.getBoundingClientRect().height;
+
+            const step = 1 / num,
+                k = 10; // Коэффциент
+
+            textSlides.forEach((item, i) => {
+                const dif = i * step - posShare;
+
+                const h = item.getBoundingClientRect().height;
+                let dy = dif * h * k;
+
+                const newPos = textContHeight / 2 + dy;
+
+                item.style.top = `${newPos}px`;
+
+                let op = newPos - .5 * textContHeight;
+                op = Math.abs(op);
+                op = op > .5 * textContHeight 
+                        ? .5 * textContHeight 
+                        : op;
+                op = 1 - Math.pow(op / (.5 * textContHeight), 2);
+                item.style.opacity = op;
+            });
+        }
+
         animate(pos) {
+            this.animateText(pos);
+
             const h = this.cont.getBoundingClientRect().height,
-                curSlide = Math.floor((pos / h) * (this.num + 1)); 
-                // num + 1 - is inreased in order to let the last slide be vissible enough time
-            
+                curSlide = Math.floor((pos / h) * (this.num + 1));
+            // num + 1 - is inreased in order to let the last slide be vissible enough time
+
 
             // Some very custom things below
             if (!this.prevSlide || this.prevSlide != curSlide) {
@@ -169,14 +205,7 @@
                     }
                 });
 
-                // Texts 
-                this.a.texts.forEach((item, i) => {
-                    item.classList.remove("text-section--item_active");
-                    if (i == curSlide) {
-                        item.classList.add("text-section--item_active");
-                    }
-                });
-
+                
                 this.prevSlide = curSlide;
             }
         }
