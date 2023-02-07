@@ -155,7 +155,7 @@
                 textContHeight = textSlides[0].parentElement.getBoundingClientRect().height;
 
             const step = 1 / num,
-                k = 10; // Коэффциент
+                k = 5; // Коэффциент
 
             textSlides.forEach((item, i) => {
                 const dif = i * step - posShare;
