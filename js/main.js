@@ -1,6 +1,3 @@
-// AOS.init({
-//     startEvent: 'customScroll'
-// });
 
 
 (function () {
@@ -19,7 +16,8 @@
             this._sticked = false;
 
             const that = this;
-            rootScrollableElement.addEventListener("scroll", () => { that.onScroll() });
+            // rootScrollableElement
+            document.addEventListener("scroll", () => { that.onScroll() });
         }
 
         get sticked() {
@@ -86,20 +84,20 @@
 
             // Style preparations
             this.cont.style.position = "relative";
-            this.gallery.style.position = "absolute";
-            this.gallery.style.top = "0";
-            this.gallery.style.left = "0";
-            this.gallery.style.right = "0";
+            this.sticky(false); // position: absolute; top: 0; left: 0; right: 0
 
             // Seting the gallery container size  
             this.setupContainer();
 
             // Return to prev Scroll position (if it was saved in localStorage before) 
-            const prevScrollPos = localStorage.getItem("curScroll") || 0;
-            if (prevScrollPos > 0) {
-                this.main.scrollTo({
-                    top: prevScrollPos
-                })
+            if (this.isLocalStorageAvailable()) {
+                const prevScrollPos = localStorage.getItem("curScroll") || 0;
+                if (prevScrollPos > 0) {
+                    // this.main.scrollTo({
+                    window.scrollTo({
+                        top: prevScrollPos
+                    })
+                }
             }
 
             // Listeners
@@ -117,28 +115,67 @@
             this.onScroll();
         }
 
+        sticky(makeSticky) {
+            const isSticky = this.gallery.style.position === "fixed";
+            if (isSticky && !makeSticky) {
+                this.gallery.style.position = "absolute";
+                this.gallery.style.top = "0";
+                this.gallery.style.left = "0";
+                this.gallery.style.right = "0";
+                return true;
+            }
+
+            if (!isSticky && makeSticky) {
+                this.gallery.style.position = "fixed";
+                this.gallery.style.left = "0%";
+                this.gallery.style.right = "0%";
+                this.gallery.style.top = "50%";
+                this.gallery.style.transform = "translateY(-50%)";
+                return true;
+            }
+
+            return false;
+        }
+
         onScroll(e) {
             const scrollTop = this.main.scrollTop,
                 contSize = this.cont.getBoundingClientRect(),
-                gallerySize = this.gallery.getBoundingClientRect(),
-                mainSize = this.main.getBoundingClientRect();
-
+                gallerySize = this.gallery.getBoundingClientRect();
+            
             let newPos = (window.innerHeight - gallerySize.height) / 2 - contSize.top;
 
 
             if (newPos > contSize.height - gallerySize.height) {
                 // Stick to the bottom of container
                 newPos = contSize.height - gallerySize.height;
+                this.sticky(false);
+                this.move(newPos);
             } else if (newPos <= 0) {
                 // Stick to the top of container
                 newPos = 0;
+                this.sticky(false);
+                this.move(newPos);
+            } else {
+                this.sticky(true);
             }
 
-            this.move(newPos);
             this.animate(newPos);
 
             // Store the scroll position for page reload cases
-            localStorage.curScroll = this.main.scrollTop;
+            if (this.isLocalStorageAvailable()) {
+                localStorage.curScroll = this.main.scrollTop;                
+            }
+        }
+
+        isLocalStorageAvailable(){
+            var test = 'test';
+            try {
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch(e) {
+                return false;
+            }
         }
 
         move(pos) {
@@ -173,7 +210,9 @@
                         ? .5 * textContHeight 
                         : op;
                 op = 1 - Math.pow(op / (.5 * textContHeight), 2);
+
                 item.style.opacity = op;
+                // item.style.transform = `translateY(-50%) scale(${op})`;
             });
         }
 
@@ -205,6 +244,14 @@
                     }
                 });
 
+                // Texts
+                // this.a.texts.forEach((item, i) => {
+                //     item.classList.remove("text-section--item_active");
+                //     if (i == curSlide) {
+                //         item.classList.add("text-section--item_active");
+                //     }
+                // });
+
                 
                 this.prevSlide = curSlide;
             }
@@ -224,10 +271,13 @@
     //#endregion ScrollingGallery
 
     let scrollingGallery = new ScrollingGallery(
-        rootScrollableElement,
+        // rootScrollableElement,
+        document,
         document.querySelector(".possibilities"),
         document.querySelector(".possibilities--cont"),
         6
     )
+
+    AOS?.init?.({});
 
 })()
