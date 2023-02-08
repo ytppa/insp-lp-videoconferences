@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Видеоконференции Inspider</title>
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/variables.css">
-    <link rel="stylesheet" href="./css/main.css">
+
+    <link rel="stylesheet" href="./css/bulma/bulma.min.css">
+    <link rel="stylesheet" href="./css/bulma/fw.css">
+
+    <link rel="stylesheet" href="./css/variables.css?v=1.1">
+    <link rel="stylesheet" href="./css/main.css?v=1.1">
 
     <!-- AOS (animate on scroll) -->
     <!-- <link rel="stylesheet" type="text/css" href="./css/aos.css"> -->
@@ -22,12 +26,15 @@
     <div class="root">
         <div class="root--inner">
             <!-- Hero Section with header -->
-            <div class="section main">
-                <div id="topMenu" class="header">
-                    <div class="header--wrapper">
-                        <div class="header--inner wrapper-1200">
-                            <a href="//inspider.ru" class="logo" target="_blank"><img src="./i/logo.png" alt="Видеоконференции Inspider"></a>
-                            <button id="cta-0" class="button">Записаться на вебинар</button>
+            <div class="b-section main">
+                <div id="topMenu" class="b-header">
+                    <div class="b-header--wrapper">
+                        <div class="b-header--inner wrapper-1200">
+                            <a href="//inspider.ru" class="logo" target="_blank"><img src="./i/logo.png"
+                                    alt="Видеоконференции Inspider"></a>
+
+                            <button id="cta-0" class="b-button" aria-haspopup="true"
+                                aria-controls="dropdown-menu">Записаться на вебинар</button>
                         </div>
                     </div>
                 </div>
@@ -48,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="stratched-button">
-                                <button id="cta-1" class="button">Узнать больше</button>
+                                <button id="cta-1" class="b-button">Узнать больше</button>
                             </div>
                         </div>
                     </div>
@@ -74,7 +81,7 @@
                 </picture>
             </div>
 
-            <div class="section possibilities">
+            <div class="b-section possibilities">
                 <div class="possibilities--cont">
                     <div class="possibilities--gallery wrapper-1200">
                         <h2>Возможности видеоконференций <span class="insp-gr">Inspider</span></h2>
@@ -110,47 +117,47 @@
                                     <div class="text-section--item text-section--item_active">
                                         <h3 class="insp-gr">Мгновенное подключение</h3>
                                         <div class="text-section--paragraph">
-                                            INSPIDER обеспечивает быстрое и удобное подключение участников по одной 
+                                            INSPIDER обеспечивает быстрое и удобное подключение участников по одной
                                             прямой ссылке.
                                         </div>
                                     </div>
                                     <div class="text-section--item">
                                         <h3 class="insp-gr">Автоматическая запись встречи</h3>
                                         <div class="text-section--paragraph">
-                                            Забыли вовремя нажать на кнопку записи? Не беда! INSPIDER ведет 
-                                            автоматическую запись всех конференций (разовых и регулярных). Вернуться 
+                                            Забыли вовремя нажать на кнопку записи? Не беда! INSPIDER ведет
+                                            автоматическую запись всех конференций (разовых и регулярных). Вернуться
                                             к просмотру можно в любой удобный момент.
                                         </div>
                                     </div>
                                     <div class="text-section--item">
                                         <h3 class="insp-gr">Расшифровка текста</h3>
                                         <div class="text-section--paragraph">
-                                            К возможности записи INSPIDER добавил возможность субтитров. С помощью 
-                                            функции распознавания речи происходит перевод аудио в текстовый формат 
+                                            К возможности записи INSPIDER добавил возможность субтитров. С помощью
+                                            функции распознавания речи происходит перевод аудио в текстовый формат
                                             для более эффективной работы с полученной информацией (записи в заметки).
                                         </div>
                                     </div>
                                     <div class="text-section--item">
                                         <h3 class="insp-gr">Аналитика встречи</h3>
                                         <div class="text-section--paragraph">
-                                            Удобное управление качеством деловой коммуникации с помощью инструментов 
-                                            по отслеживанию активности участников во время конференции, отслеживание 
+                                            Удобное управление качеством деловой коммуникации с помощью инструментов
+                                            по отслеживанию активности участников во время конференции, отслеживание
                                             времени, проведенного на встрече, время включенных камеры и микрофона.
                                         </div>
                                     </div>
                                     <div class="text-section--item">
                                         <h3 class="insp-gr">Виртуальная рабочая доска</h3>
                                         <div class="text-section--paragraph">
-                                            место для плодотворной командной работы во время конференций в офисе, 
-                                            удалённо, в смешанном формате. Участники могут сотрудничать и совместно 
+                                            место для плодотворной командной работы во время конференций в офисе,
+                                            удалённо, в смешанном формате. Участники могут сотрудничать и совместно
                                             работать над задачей в одном пространстве, но из любой точки мира.
                                         </div>
                                     </div>
                                     <div class="text-section--item">
                                         <h3 class="insp-gr">Опросы во время конференций</h3>
                                         <div class="text-section--paragraph">
-                                            Приглашение участников к отрытому обсуждению, сбор мнений по важным 
-                                            вопросам прямо во время конференции. Планирование следующих встреч 
+                                            Приглашение участников к отрытому обсуждению, сбор мнений по важным
+                                            вопросам прямо во время конференции. Планирование следующих встреч
                                             через голосование.
                                         </div>
                                     </div>
@@ -161,7 +168,7 @@
                 </div>
             </div>
 
-            <div class="section additional">
+            <div class="b-section additional">
                 <div class="wrapper-1200">
                     <div class="additional--heading">
                         <h3 class="pad-r-1col">
@@ -211,7 +218,7 @@
                 </div>
             </div>
 
-            <div class="section invitation">
+            <div class="b-section invitation">
                 <div class="wrapper-1200">
                     <div class="invitation--content">
                         <div class="invitation--indent pad-r-1col">
@@ -226,7 +233,7 @@
                             </div>
                         </div>
                         <div class="stratched-button">
-                            <button class="button">Регистрация</button>
+                            <button class="b-button">Регистрация</button>
                         </div>
                     </div>
                     <div class="invitation--bottom pad-l-1col">
@@ -238,6 +245,58 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="modalForm" class="modal px-4">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <div class="block">
+                    <h3>Оставьте свои контакты</h3>
+                    <p>Менеджер свяжется с вами в ближайшее время.</p>
+                </div>
+
+                <div class="field">
+                    <label class="label">Организация</label>
+                    <div class="control">
+                        <input class="input" name="company" type="text" placeholder="Название организации">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Имя</label>
+                    <div class="control">
+                        <input class="input" name="name" type="text" placeholder="Как к вам обращаться?">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Должность</label>
+                    <div class="control">
+                        <input class="input" name="position" type="text" placeholder="">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" placeholder="user@domain.ru">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field mt-4">
+                    <div class="control">
+                        <button class="b-button">
+                            Отправить заявку
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
     </div>
 </body>
 

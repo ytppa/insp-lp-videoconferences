@@ -275,7 +275,7 @@
         6
     );
 
-    if (AOS != "undefined") {
+    if (!!AOS && AOS != "undefined") {
         // Add Styles
         var css = document.createElement('style');
         css.setAttribute("type", "text/css");
@@ -284,4 +284,27 @@
         // AOS Init
         AOS?.init({});
     }
+    
+    // Modal
+    document.querySelectorAll(".b-button").forEach(el => {
+        el.addEventListener("click", e => {
+            const id = e.currentTarget.getAttribute("data-target") || "modalForm";
+            document.getElementById(id).classList.add("is-active");
+            document.getElementsByTagName("html")[0].classList.add("is-clipped");
+        });
+    });
+
+    const closeMe = e => {
+        e.preventDefault();
+        e.currentTarget.closest(".modal")?.classList?.remove("is-active");
+        document.getElementsByTagName("html")[0].classList.remove("is-clipped");
+    }
+
+    document.querySelectorAll(".modal-background").forEach(el => {
+        el.addEventListener("click", closeMe)
+    });
+    document.querySelectorAll(".modal-close").forEach(el => {
+        el.addEventListener("click", closeMe)
+    });
+    
 })()
