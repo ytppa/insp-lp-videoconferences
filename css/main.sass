@@ -75,6 +75,7 @@ body
         background-position: -200% 0%
 
 .wrapper-1200
+    width: 100%
     max-width: 1200px
     margin: auto
     padding: 1rem var(--grid-pad, 1rem)
@@ -456,16 +457,28 @@ h3
             color: var(--color-white-1000, white)
             text-align: right
 
-@media screen and (max-width: 1199px)
-    :root 
-        --grid-gap: 1rem
-        --grid-pad: .5rem
-
+@media screen and (max-width: 1480px)
     h1, h2, h3
         word-break: break-word
 
     h2
         font-size: 2rem
+
+@media screen and (max-width: 1199px)
+    :root 
+        --grid-gap: 1rem
+        --grid-pad: 1rem
+    .root--inner
+        background-position: center bottom -3rem
+
+    h1, h2, h3
+        word-break: break-word
+
+    h2
+        font-size: 1.2rem
+
+    h3
+        font-size: 1.1rem
 
     .wrapper-1200
         max-width: 100vw
@@ -473,13 +486,73 @@ h3
     .f-cols--wrapper
         flex-direction: column
 
+    .f-col
+        &::before
+            display: none
+        &::after
+            border: 1px solid var(--active)
+
+    .additional
+        h3 
+            text-align: left
+            font-size: 1.2rem
+            line-height: 1.5
+    .header
+        &--wrapper
+            min-height: auto
+        &--inner
+            text-align: center
+            padding-top: .5rem
+            padding-bottom: .5rem
+    
+    .header:not(.is-sticked)
+        .header--inner
+            justify-content: center 
+            
+            .logo
+                max-width: 85%
+
+    .header.is-sticked .logo 
+        display: inline-block
+        width: 2.1rem
+        height: 2.25rem
+        background-image: url(./../i/logo.png)
+        background-position: left center
+        background-size: cover
+        background-repeat: no-repeat
+        
+        img 
+            display: none
+
+    .possibilities
+        &--cont 
+            background-position: center 35%
+            background-size: 120% auto
+
+        &--gallery
+            height: 100vh
+            padding-top: 70px
+
+            h2
+                font-size: 1.2rem
+                flex: 0 0 auto
+
+            .note-w-text
+                flex: 1 1 auto
+
+            & > * + *
+                margin-top: 1rem
+
     .note-w-text
-            flex-direction: column
-            min-height: 60vh
+        flex-direction: column
+        // min-height: 60vh
+
         &--left
-            flex: 1 1 calc((100vw - 2rem) * 2 / 3)
+            flex: 0 1 calc((90vw - 2 * var(--grid-pad)) * 2 / 3)
+            z-index: 2
         &--right
-            flex: 1 0 30vh
+            flex: 1 1 auto
+            // overflow-y: hidden
             
 
     .stratched-button
@@ -488,12 +561,20 @@ h3
     .pad-l-1col, .pad-r-1col
         padding: 0
 
-    .main > picture
-        opacity: .6
-        transform: translate(0, -3rem)
+    .section + .section 
+        margin-top: 3rem
+
+    .main
+        padding-bottom: 0
+
+        & > picture
+            opacity: .6
+            width: 80%
+            margin: 0 auto
+            transform: translate(0, 1rem)
 
     .hero
-        padding-top: 7rem
+        padding-top: 6rem
         padding-bottom: 0rem
 
         .pad-r-1col > *
@@ -505,6 +586,15 @@ h3
 
         &--title-2nd
             font-size: 3rem
+            margin-top: 0rem
 
         &--subtitle
             font-size: 1.2rem
+
+    .invitation
+        &--bottom .icon
+            width: 4rem
+            height: 4rem
+            margin-right: 0rem
+        &--bottom-text
+            // margin: 0 1rem

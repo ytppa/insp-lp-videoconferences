@@ -115,28 +115,7 @@
             this.onScroll();
         }
 
-        sticky(makeSticky) {
-            const isSticky = this.gallery.style.position === "fixed";
-            if (isSticky && !makeSticky) {
-                this.gallery.style.position = "absolute";
-                this.gallery.style.top = "0";
-                this.gallery.style.left = "0";
-                this.gallery.style.right = "0";
-                return true;
-            }
-
-            if (!isSticky && makeSticky) {
-                this.gallery.style.position = "fixed";
-                this.gallery.style.left = "0%";
-                this.gallery.style.right = "0%";
-                this.gallery.style.top = "50%";
-                this.gallery.style.transform = "translateY(-50%)";
-                return true;
-            }
-
-            return false;
-        }
-
+        // Scroll event handler
         onScroll(e) {
             const scrollTop = this.main.scrollTop,
                 contSize = this.cont.getBoundingClientRect(),
@@ -167,21 +146,44 @@
             }
         }
 
-        isLocalStorageAvailable(){
-            var test = 'test';
-            try {
-                localStorage.setItem(test, test);
-                localStorage.removeItem(test);
-                return true;
-            } catch(e) {
-                return false;
-            }
-        }
-
+        // Moving gallery through its container
         move(pos) {
             this.gallery.style.transform = `translateY(${pos}px)`;
         }
 
+        // Main animations appearing in a gallery item while scrolling 
+        animate(pos) {
+            this.animateText(pos);
+
+            const h = this.cont.getBoundingClientRect().height,
+                curSlide = Math.floor((pos / h) * (this.num + 1));
+            // num + 1 - is inreased in order to let the last slide be vissible enough time
+
+
+            // Some very custom things below
+            if (!this.prevSlide || this.prevSlide != curSlide) {
+                // Dots
+                this.a.dots.forEach((item, i) => {
+                    item.classList.remove("dots--item_active");
+                    if (i == curSlide) {
+                        item.classList.add("dots--item_active");
+                    }
+                });
+
+                // Slides
+                this.a.slides.forEach((item, i) => {
+                    item.classList.remove("slider--item_active");
+                    if (i == curSlide) {
+                        item.classList.add("slider--item_active");
+                    }
+                });
+                
+                this.prevSlide = curSlide;
+            }
+        }
+
+        // Posess all text items in gallery according to current scroll position
+        // 0 <= pos <= 1
         animateText(pos) {
             /**
              * Text
@@ -216,45 +218,40 @@
             });
         }
 
-        animate(pos) {
-            this.animateText(pos);
-
-            const h = this.cont.getBoundingClientRect().height,
-                curSlide = Math.floor((pos / h) * (this.num + 1));
-            // num + 1 - is inreased in order to let the last slide be vissible enough time
-
-
-            // Some very custom things below
-            if (!this.prevSlide || this.prevSlide != curSlide) {
-                console.log(`~ Slide ${curSlide}`);
-
-                // Dots
-                this.a.dots.forEach((item, i) => {
-                    item.classList.remove("dots--item_active");
-                    if (i == curSlide) {
-                        item.classList.add("dots--item_active");
-                    }
-                });
-
-                // Slides
-                this.a.slides.forEach((item, i) => {
-                    item.classList.remove("slider--item_active");
-                    if (i == curSlide) {
-                        item.classList.add("slider--item_active");
-                    }
-                });
-
-                // Texts
-                // this.a.texts.forEach((item, i) => {
-                //     item.classList.remove("text-section--item_active");
-                //     if (i == curSlide) {
-                //         item.classList.add("text-section--item_active");
-                //     }
-                // });
-
-                
-                this.prevSlide = curSlide;
+        // Checking if Local storage is available
+        isLocalStorageAvailable(){
+            var test = 'test';
+            try {
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch(e) {
+                return false;
             }
+        }
+
+        // Making gallery fixed in the center of viewport 
+        // if we are scrolling through it right now
+        sticky(makeSticky) {
+            const isSticky = this.gallery.style.position === "fixed";
+            if (isSticky && !makeSticky) {
+                this.gallery.style.position = "absolute";
+                this.gallery.style.top = "0";
+                this.gallery.style.left = "0";
+                this.gallery.style.right = "0";
+                return true;
+            }
+
+            if (!isSticky && makeSticky) {
+                this.gallery.style.position = "fixed";
+                this.gallery.style.left = "0%";
+                this.gallery.style.right = "0%";
+                this.gallery.style.top = "50%";
+                this.gallery.style.transform = "translateY(-50%)";
+                return true;
+            }
+
+            return false;
         }
 
         resize() {
@@ -276,8 +273,15 @@
         document.querySelector(".possibilities"),
         document.querySelector(".possibilities--cont"),
         6
-    )
+    );
 
-    AOS?.init?.({});
-
+    if (AOS != "undefined") {
+        // Add Styles
+        var css = document.createElement('style');
+        css.setAttribute("type", "text/css");
+        document.getElementsByTagName("head")[0].appendChild(css); 
+        
+        // AOS Init
+        AOS?.init({});
+    }
 })()
