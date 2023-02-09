@@ -1,6 +1,6 @@
 
 
-(function () {
+(function() {
 
 
     const rootScrollableElement = document.querySelector(".root");
@@ -120,7 +120,7 @@
             const scrollTop = this.main.scrollTop,
                 contSize = this.cont.getBoundingClientRect(),
                 gallerySize = this.gallery.getBoundingClientRect();
-            
+
             let newPos = (window.innerHeight - gallerySize.height) / 2 - contSize.top;
 
 
@@ -142,7 +142,7 @@
 
             // Store the scroll position for page reload cases
             if (this.isLocalStorageAvailable()) {
-                localStorage.curScroll = this.main.scrollTop;                
+                localStorage.curScroll = this.main.scrollTop;
             }
         }
 
@@ -177,7 +177,7 @@
                         item.classList.add("slider--item_active");
                     }
                 });
-                
+
                 this.prevSlide = curSlide;
             }
         }
@@ -208,9 +208,9 @@
 
                 let op = newPos - .5 * textContHeight;
                 op = Math.abs(op);
-                op = op > .5 * textContHeight 
-                        ? .5 * textContHeight 
-                        : op;
+                op = op > .5 * textContHeight
+                    ? .5 * textContHeight
+                    : op;
                 op = 1 - Math.pow(op / (.5 * textContHeight), 2);
 
                 item.style.opacity = op;
@@ -219,13 +219,13 @@
         }
 
         // Checking if Local storage is available
-        isLocalStorageAvailable(){
+        isLocalStorageAvailable() {
             var test = 'test';
             try {
                 localStorage.setItem(test, test);
                 localStorage.removeItem(test);
                 return true;
-            } catch(e) {
+            } catch (e) {
                 return false;
             }
         }
@@ -275,17 +275,20 @@
         6
     );
 
-    if (!!AOS && AOS != "undefined") {
-        // Add Styles
-        var css = document.createElement('style');
-        css.setAttribute("type", "text/css");
-        document.getElementsByTagName("head")[0].appendChild(css); 
-        
-        // AOS Init
-        AOS?.init({});
-    }
-    
-    // Modal
+    // try {
+    //     AOS?.init({});
+
+    //     // Add Styles
+    //     var css = document.createElement('style');
+    //     css.setAttribute("type", "text/css");
+    //     document.getElementsByTagName("head")[0].appendChild(css);
+    // } catch(e) {
+    //     throw new Error("Looks like AOS is not defined");
+    // }
+
+    /**
+     * Modal
+     */
     document.querySelectorAll(".b-button").forEach(el => {
         el.addEventListener("click", e => {
             const id = e.currentTarget.getAttribute("data-target") || "modalForm";
@@ -303,8 +306,159 @@
     document.querySelectorAll(".modal-background").forEach(el => {
         el.addEventListener("click", closeMe)
     });
+
     document.querySelectorAll(".modal-close").forEach(el => {
         el.addEventListener("click", closeMe)
     });
+
+
+
     
+    /**
+     * Form
+     */
+    listenForm("#presentationForm");
+
+    function isEmail(email) {
+        var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-_.+-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return emailRegex.test(email);
+    }
+    
+    function changeButton(company, name, mail, form) {
+        if (!company || !name || !mail) {
+            form.find("button").disabled = true;
+            return false;
+        }
+
+        form.find("button").disabled = false;
+        return true;
+    }
+
+    function listenForm(formID) {
+        var f = $(formID);
+        var company = f.find("input[name='company']:first");
+        var name = f.find("input[name='name']:first");
+        var email = f.find("input[name='email']:first");
+
+        var isGoodCompany = false;
+        var isGoodName = false;
+        var isGoodMail = false;
+        
+        var setState = function(el, state, text) {
+            const control = el.closest(".control");
+
+            if (state) {
+                // Input border
+                el.removeClass("is-danger").addClass("is-success");
+
+                // Right icon
+                control.addClass("has-icons-right");
+                control.find(".is-right").remove();
+                $(`<span class="icon is-small is-right"><i class="fas fa-check"></i></span>`)
+                    .appendTo(control);
+
+                // Text
+                control.find("p.help").remove();
+                if (!!text && text.length) {
+                    $(`<p class="help is-success">${text}</p>`)
+                        .appendTo(control);
+                } 
+            } else {
+                // Input border
+                el.removeClass("is-success").addClass("is-danger");
+
+                // Right icon
+                control.addClass("has-icons-right");
+                control.find(".is-right").remove();
+                $(`<span class="icon is-small is-right"><i class="fas fa-exclamation-triangle"></i></span>`)
+                    .appendTo(control);
+                    
+                // Text
+                control.find("p.help").remove();
+                if (!!text && text.length) {
+                    $(`<p class="help is-danger">${text}</p>`)
+                        .appendTo(control);
+                }
+            }
+        }
+
+        company.on("input", function () {
+            if ($(this).val() == "") {
+                setState($(this), false, "Поле не может быть пустым");
+                isGoodCompany = false;
+            } else {
+                setState($(this), true, null);
+                isGoodCompany = true;
+            }
+            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+        });
+
+        name.on("input", function () {
+            if ($(this).val() == "") {
+                setState($(this), false, "Поле не может быть пустым");
+                isGoodCompany = false;
+            } else {
+                setState($(this), true, null);
+                isGoodCompany = true;
+            }
+            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+        });
+        
+        email.on("input", function () {
+            var userText = $(this).val();
+
+            if (userText == "") {
+                setState($(this), false, "Укажите, пожалуйста, электронную почту");
+                isGoodMail = false;
+            } else if (isEmail(userText)) {
+                setState($(this), false, "Некорректный формат почты");
+                isGoodMail = false;
+            } else {
+                setState($(this), true, null);
+                isGoodMail = true;
+            }
+
+            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+        });
+
+        f.on("submit", function (e) {
+            e.preventDefault();
+
+            if ($(this).find("button").disabled) {
+                return;
+            }
+
+            formSubmit($(this));
+        });
+    }
+
+    function formSubmit(form) {
+        if (form.find("button").hasClass("disable")) {
+            return;
+        }
+        $.post(
+            "sendMail.php",
+            form.serializeArray(),
+            function (data) {
+                if (data.result) {
+                    Fancybox.show([{
+                        src: "<div class='insp-popup-error'>Ссылка на презентацию успешно отправлена на указанный адрес! Спасибо!</div>",
+                        type: "html",
+                        closeButton: "inside"
+                    }]);
+                    form.trigger("reset");
+                }
+                else {
+                    Fancybox.show([{
+                        src: "<div class='insp-popup-error'>" + data.errors + "</div>",
+                        type: "html",
+                        closeButton: "inside"
+                    }]);
+                }
+            },
+            "json"
+        );
+
+    }
+
 })()

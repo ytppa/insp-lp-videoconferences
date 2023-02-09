@@ -14,11 +14,7 @@
     <link rel="stylesheet" href="./css/variables.css?v=1.1">
     <link rel="stylesheet" href="./css/main.css?v=1.1">
 
-    <!-- AOS (animate on scroll) -->
-    <!-- <link rel="stylesheet" type="text/css" href="./css/aos.css"> -->
-    <script type="text/javascript" src="./js/aos.js" defer></script>
-
-    <script src="./js/main.js" defer></script>
+    
 
 </head>
 
@@ -255,49 +251,59 @@
                     <p>Менеджер свяжется с вами в ближайшее время.</p>
                 </div>
 
-                <div class="field">
-                    <label class="label">Организация</label>
-                    <div class="control">
-                        <input class="input" name="company" type="text" placeholder="Название организации">
-                    </div>
-                </div>
+                <form method="POST" enctype="multipart/form-data" id="presentationForm">
 
-                <div class="field">
-                    <label class="label">Имя</label>
-                    <div class="control">
-                        <input class="input" name="name" type="text" placeholder="Как к вам обращаться?">
+                    <div class="field">
+                        <label class="label">Организация</label>
+                        <div class="control">
+                            <input class="input" name="company" type="text" placeholder="Название организации">
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label">Должность</label>
-                    <div class="control">
-                        <input class="input" name="position" type="text" placeholder="">
+                    <div class="field">
+                        <label class="label">Имя</label>
+                        <div class="control">
+                            <input class="input" name="name" type="text" placeholder="Как к вам обращаться?">
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control has-icons-left">
-                        <input class="input" type="email" placeholder="user@domain.ru">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
+                    <!-- <div class="field">
+                        <label class="label">Должность</label>
+                        <div class="control">
+                            <input class="input" name="position" type="text" placeholder="">
+                        </div>
+                    </div> -->
+
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control has-icons-left">
+                            <input class="input" name="email" type="email" placeholder="user@domain.ru">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field mt-4">
-                    <div class="control">
-                        <button class="b-button">
-                            Отправить заявку
-                        </button>
+                    <div class="field mt-4">
+                        <div class="control">
+                            <button type="submit" class="b-button">
+                                Отправить заявку
+                            </button>
+                        </div>
                     </div>
-                </div>
 
+                </form>
             </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
-</body>
 
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    
+    <!-- AOS (animate on scroll) -->
+    <!-- <link rel="stylesheet" type="text/css" href="./css/aos.css"> -->
+    <script type="text/javascript" src="./js/aos.js"></script>
+
+    <script type="text/javascript" src="./js/main.js"></script>
+</body>
 </html>
