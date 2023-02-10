@@ -242,6 +242,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
     <div id="modalForm" class="modal px-4">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -254,32 +256,35 @@
                 <form method="POST" enctype="multipart/form-data" id="presentationForm">
 
                     <div class="field">
-                        <label class="label">Организация</label>
+                        <label class="label">Компания</label>
                         <div class="control">
-                            <input class="input" name="company" type="text" placeholder="Название организации">
+                            <input required class="input" name="company" type="text" placeholder="Название организации">
                         </div>
                     </div>
 
                     <div class="field">
                         <label class="label">Имя</label>
                         <div class="control">
-                            <input class="input" name="name" type="text" placeholder="Как к вам обращаться?">
+                            <input required class="input" name="name" type="text" placeholder="Как к вам обращаться?">
                         </div>
                     </div>
-
-                    <!-- <div class="field">
-                        <label class="label">Должность</label>
-                        <div class="control">
-                            <input class="input" name="position" type="text" placeholder="">
-                        </div>
-                    </div> -->
 
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control has-icons-left">
-                            <input class="input" name="email" type="email" placeholder="user@domain.ru">
+                            <input required class="input" name="email" type="email" placeholder="user@domain.ru">
                             <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Телефон</label>
+                        <div class="control has-icons-left">
+                            <input required class="input" name="phone" type="tel">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-phone"></i>
                             </span>
                         </div>
                     </div>
@@ -294,9 +299,17 @@
 
                 </form>
             </div>
+            <div class="box is-hidden" id="mContResult">
+                <div class="block">
+                    <h3 class="title is-2">Оставьте свои контакты</h3>
+                    <p>Менеджер свяжется с вами в ближайшее время.</p>
+                </div>
+            </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
+
+    
 
     <script type="text/javascript" src="./js/jquery.js"></script>
     

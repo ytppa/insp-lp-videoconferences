@@ -65,7 +65,6 @@
      * Vertical scrolling gallery
      */
 
-    //#region ScrollingGallery
     class ScrollingGallery {
         constructor(main, cont, gallery, num) {
             this.main = main;
@@ -265,7 +264,6 @@
             this.cont.style.height = `${this.num * galleryHeight}px`;
         }
     }
-    //#endregion ScrollingGallery
 
     let scrollingGallery = new ScrollingGallery(
         // rootScrollableElement,
@@ -275,16 +273,20 @@
         6
     );
 
-    // try {
-    //     AOS?.init({});
+    /**
+     * On screen appearing animations 
+     */
+    try {
+        AOS?.init({});
 
-    //     // Add Styles
-    //     var css = document.createElement('style');
-    //     css.setAttribute("type", "text/css");
-    //     document.getElementsByTagName("head")[0].appendChild(css);
-    // } catch(e) {
-    //     throw new Error("Looks like AOS is not defined");
-    // }
+        // Add Styles
+        var css = document.createElement('link');
+        css.setAttribute("rel", "stylesheet");
+        css.setAttribute("href", "./css/aos.css");
+        document.getElementsByTagName("head")[0].appendChild(css);
+    } catch(e) {
+        throw new Error("Looks like AOS is not defined");
+    }
 
     /**
      * Modal
@@ -324,25 +326,33 @@
         return emailRegex.test(email);
     }
     
-    function changeButton(company, name, mail, form) {
-        if (!company || !name || !mail) {
-            form.find("button").disabled = true;
+    function changeButton(company, name, mail, phone, form) {
+        
+        if (!company || !name || !mail || !phone) {
+            form.find("button").prop('disabled', true);
             return false;
         }
 
-        form.find("button").disabled = false;
+        form.find("button").prop('disabled', false);
         return true;
     }
+
+    var isGoodCompany = false,
+        isGoodName = false,
+        isGoodMail = false,
+        isGoodPhone = false;
 
     function listenForm(formID) {
         var f = $(formID);
         var company = f.find("input[name='company']:first");
         var name = f.find("input[name='name']:first");
         var email = f.find("input[name='email']:first");
+        var phone = f.find("input[name='phone']:first");
 
-        var isGoodCompany = false;
-        var isGoodName = false;
-        var isGoodMail = false;
+        // var isGoodCompany = false;
+        // var isGoodName = false;
+        // var isGoodMail = false;
+        // var isGoodPhone = false;
         
         var setState = function(el, state, text) {
             const control = el.closest(".control");
@@ -384,24 +394,24 @@
 
         company.on("input", function () {
             if ($(this).val() == "") {
-                setState($(this), false, "Поле не может быть пустым");
+                setState($(this), false, null);
                 isGoodCompany = false;
             } else {
                 setState($(this), true, null);
                 isGoodCompany = true;
             }
-            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+            changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, f);
         });
 
         name.on("input", function () {
             if ($(this).val() == "") {
-                setState($(this), false, "Поле не может быть пустым");
-                isGoodCompany = false;
+                setState($(this), false, null);
+                isGoodName = false;
             } else {
                 setState($(this), true, null);
-                isGoodCompany = true;
+                isGoodName = true;
             }
-            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+            changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, f);
         });
         
         email.on("input", function () {
@@ -410,7 +420,7 @@
             if (userText == "") {
                 setState($(this), false, "Укажите, пожалуйста, электронную почту");
                 isGoodMail = false;
-            } else if (isEmail(userText)) {
+            } else if (!isEmail(userText)) {
                 setState($(this), false, "Некорректный формат почты");
                 isGoodMail = false;
             } else {
@@ -418,13 +428,27 @@
                 isGoodMail = true;
             }
 
-            changeButton(isGoodCompany, isGoodName, isGoodMail, f);
+            changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, f);
+        });
+
+        
+        phone.on("input", function () {
+            if ($(this).val() == "") {
+                setState($(this), false, null);
+                isGoodPhone = false;
+            } else {
+                setState($(this), true, null);
+                isGoodPhone = true;
+            }
+            changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, f);
         });
 
         f.on("submit", function (e) {
             e.preventDefault();
+            
+            changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, f);
 
-            if ($(this).find("button").disabled) {
+            if (!!$(this).find("button").prop('disabled')) {
                 return;
             }
 
@@ -433,27 +457,45 @@
     }
 
     function formSubmit(form) {
-        if (form.find("button").hasClass("disable")) {
+        if (!!form.find("button").prop('disabled')) {
             return;
         }
+
         $.post(
             "sendMail.php",
             form.serializeArray(),
             function (data) {
+                const blockEl = form.closest(".modal-content").find(".block:first");
+                
                 if (data.result) {
-                    Fancybox.show([{
-                        src: "<div class='insp-popup-error'>Ссылка на презентацию успешно отправлена на указанный адрес! Спасибо!</div>",
-                        type: "html",
-                        closeButton: "inside"
-                    }]);
+                    blockEl
+                        .find(".notification")
+                        .remove();
+                    
+                    const message = $(`
+                        <div class="notification mt-4 is-success is-size-7">
+                            Cпасибо. Заявка успешно отправлена. 
+                            Менеджер свяжется с вами в ближайшее время.
+                        </div>`
+                    );
+                    message.appendTo(blockEl);
+
                     form.trigger("reset");
-                }
-                else {
-                    Fancybox.show([{
-                        src: "<div class='insp-popup-error'>" + data.errors + "</div>",
-                        type: "html",
-                        closeButton: "inside"
-                    }]);
+                    isGoodCompany = false;
+                    isGoodName = false;
+                    isGoodMail = false;
+                    isGoodPhone = false;
+                    changeButton(isGoodCompany, isGoodName, isGoodMail, isGoodPhone, form);
+                } else {
+                    blockEl
+                        .find(".notification")
+                        .remove()
+                        .end()
+                        .append(`
+                            <div class="notification mt-4 is-danger is-size-7">
+                                ${data.errors}
+                            </div>
+                        `);
                 }
             },
             "json"

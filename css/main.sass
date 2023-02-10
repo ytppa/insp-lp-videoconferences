@@ -54,6 +54,10 @@ body
     transition: all 0.1s ease-in-out
     will-change: box-shadow
 
+    &:disabled,
+    &.b-button_dsabled
+        background: hsl(0, 0%, 80%)
+
     &:hover
         box-shadow: -2px -2px 5px rgb(255 255 255 / 90%), 2px 2px 4px rgb(31 42 102 / 8%)
 
